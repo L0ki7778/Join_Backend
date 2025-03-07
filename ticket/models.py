@@ -17,6 +17,9 @@ class User(models.Model):
     phone = models.IntegerField()
     mail = models.EmailField()
     
+    def __str__(self):
+        return f"{self.name}"
+    
 
 # Create your models here.
 
@@ -26,7 +29,7 @@ class Ticket(models.Model):
     description = models.TextField()
     deadline = models.DateField()
     assignees = models.ManyToManyField(
-        User,  related_name="Users")
-    subtasks = models.SlugField(null=True, blank=True)
+        User,  related_name="assignees")
+    subtasks = models.JSONField(null=True, blank=True)
     priority = models.CharField(max_length=50,choices=PRIORITY_LIST)
     category = models.CharField(max_length=50,choices=STORY)
